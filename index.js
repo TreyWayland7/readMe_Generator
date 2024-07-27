@@ -79,33 +79,39 @@ function generateReadMe(response){
     
     let readMeString = 
     `# ${response.projectTitle}
+
+## Description
 ${response.description} \n
-        
-Installation
+
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
+
+## Installation
 ${response.installInstructs} \n
 
-Usage
+## Usage
 ${response.usageInformation} \n
 
-Credits
+## License
+This application is using the ${response.License} License.\n
+
+## Contributing
 ${response.contributed} \n
 
-Tests
+## Tests
 ${response.testInstructions} \n
 
-License
-${response.License} \n
-        
-Git Hub Username
-${response.gitHubUsername} \n
-        
-Email Address
-${response.emailAddress} \n
-
-
+## Questions
+The link to the github repository can be found here: ${response.gitHubUsername}
+For any further questions you can reach out to: ${response.emailAddress}
 `;
     
-    fs.writeFile('temp_readme.txt', readMeString, (err) =>
+    fs.writeFile('temp_readme.md', readMeString, (err) =>
         err ? console.error(err) : console.log('Success!')
         )
 }

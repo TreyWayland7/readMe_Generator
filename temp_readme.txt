@@ -1,4 +1,6 @@
 # 1
+
+Description
 2 
 
         
@@ -10,7 +12,7 @@ Usage
 4 
 
 
-Credits
+Contributing
 5 
 
 
@@ -19,15 +21,9 @@ Tests
 
 
 License
-MIT 
+This application is using the MIT License.
 
         
-Git Hub Username
-8 
-
-        
-Email Address
-9 
-
-
-
+Questions
+The link to the github repository can be found here: 8
+For any further questions you can reach out to: 9
