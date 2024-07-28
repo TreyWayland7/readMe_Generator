@@ -38,7 +38,7 @@ const questions = [
         type: "list",
         message: "Which License?",
         name: "License",
-        choices: ["MIT", "GPL", "LGPL", "Apache License 2.0", "MPL 2.0", "BSD License"],
+        choices: ["MIT", "GNU", "IBM", "Apache License 2.0", "Perl", "Eclipse"],
     },
     {
         type: "input",
@@ -53,35 +53,42 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.error(err) : console.log('Success!')
+        )
+
+}
 
 // TODO: Create a function to initialize app
 function init() {
-    askUserQuestion();
+    askUserQuestions();
 }
 
 // Function call to initialize app
 init();
 
 
-function askUserQuestion(){
+function askUserQuestions(){
     inquirer
   .prompt(questions)
   .then((response) =>
     generateReadMe(response)
-    // console.log(response)
- 
   );
 }
 
 
 function generateReadMe(response){
-    
+
+    let licenseURL = getLicenseURL(response.License);
+
     let readMeString = 
     `# ${response.projectTitle}
 
 ## Description
 ${response.description} \n
+
+${licenseURL}
 
 ## Table of Contents
 * [Installation](#installation)
@@ -107,11 +114,26 @@ ${response.contributed} \n
 ${response.testInstructions} \n
 
 ## Questions
-The link to the github repository can be found here: ${response.gitHubUsername}
-For any further questions you can reach out to: ${response.emailAddress}
+* The link to the github repository can be found here: [${response.gitHubUsername}](https://github.com/${response.gitHubUsername}/)
+* For any further questions you can reach out to: ${response.emailAddress}
 `;
     
-    fs.writeFile('temp_readme.md', readMeString, (err) =>
-        err ? console.error(err) : console.log('Success!')
-        )
+    writeToFile("README.md", readMeString) ;
+}
+
+function getLicenseURL(license){
+    switch (license){
+        case "MIT":
+            return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+        case "GNU":
+            return "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+        case "IBM":
+            return "[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)";
+        case "Apache License 2.0":
+            return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+        case "Perl":
+            return "[![License: Artistic-2.0](https://img.shields.io/badge/License-Perl-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)";
+        case "Eclipse":
+            return "[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)";
+    }
 }
