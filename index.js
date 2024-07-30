@@ -84,11 +84,11 @@ function generateReadMe(response){
 
     let readMeString = 
     `# ${response.projectTitle}
+${licenseURL}
 
 ## Description
 ${response.description} \n
 
-${licenseURL}
 
 ## Table of Contents
 * [Installation](#installation)
