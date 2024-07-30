@@ -14,7 +14,8 @@ function renderLicenseBadge(license) {
         return "[![License: Artistic-2.0](https://img.shields.io/badge/License-Perl-0298c3.svg)]";
     case "Eclipse":
         return "[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)]";
-}
+    }
+    return "";
 }
 
 // TODO: Create a function that returns the license link
@@ -33,7 +34,8 @@ function renderLicenseLink(license) {
         return "(https://opensource.org/licenses/Artistic-2.0)";
     case "Eclipse":
         return "(https://opensource.org/licenses/EPL-1.0)";
-}
+    }
+    return "";
 }
 
 // TODO: Create a function that returns the license section of README
@@ -44,8 +46,7 @@ function renderLicenseSection(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  let licenseString = renderLicenseSection();
-
+  let licenseString = renderLicenseSection(data.License);
   let readMeString = 
   `# ${data.projectTitle}
 ${licenseString}
